@@ -1,4 +1,4 @@
-Dự kiến công nghệ sử dụng:
+Dự kiến công nghệ sử dụng
 Backend
 + Framework: Django
 + Ngôn ngữ: Python
