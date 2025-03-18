@@ -3,7 +3,7 @@
 __pycache__
 db.sqlite3
 *.log
-
+node_modules
 # Thư mục môi trường ảo (virtualenv)
 venv/
 env/
