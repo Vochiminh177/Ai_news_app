@@ -1,7 +1,6 @@
 from django.db import models
 from users.models import UserModel
 class Category(models.Model):
-    category_id =models.CharField(max_length=255)
     category_name =models.CharField(max_length=255,unique=True)
     created_at= models.DateTimeField(auto_now_add=True)
 
@@ -14,7 +13,6 @@ class Article(models.Model):
         ('published','Published'),
         ('rejected','Rejected'),
     ]
-    article_id =models.CharField(max_length=255)
     title =models.CharField(max_length=255)
     description = models.TextField(blank=True , null=True)
     img= models.TextField(blank=True,null=True)
@@ -31,7 +29,6 @@ class Article(models.Model):
 
     
 class Comment(models.Model):
-    comment_id =models.CharField(max_length=255)
     content =models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
@@ -49,44 +46,3 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.username} likes {self.article.title}"
     
-class Role(models.Model):
-    role_id =models.CharField(max_length=255)
-    role_name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['user', 'role'], name='unique_user_role')
-        ]
-    def __str__(self):
-        return self.role_name
-
-class UserRole(models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE ,related_name='user_roles')
-    role = models.ForeignKey(Role, on_delete=models.CASCADE ,related_name='role_users')
-
-    class Meta:
-        unique_together = ('user', 'role')
-
-    def __str__(self):
-        return f"{self.user.username} - {self.role.role_name}"
-
-class Permission(models.Model):
-    per_id =models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
-
-class PermissionRole(models.Model):
-    role = models.ForeignKey(Role, on_delete=models.CASCADE , related_name='role_permissions')
-    permission = models.ForeignKey(Permission, on_delete=models.CASCADE, related_name='permission_roles')
-
-    class Meta:
-        constraints = [
-        models.UniqueConstraint(fields=['role', 'permission'], name='unique_role_permission')
-        ]
-
-    def __str__(self):
-        return f"{self.role.role_name} - {self.permission.name}"
