@@ -5,8 +5,8 @@ import ToggleTheme from "../components/ui/ToggleTheme";
 
 const Home = () => {
   return (
-    <Container>
-      <div className="flex justify-between my-10">
+    <Container className="">
+      <div className="flex justify-between py-28">
         <Post
           title="Breaking News: New Technology Revolutionizing the Industry"
           publishDate="March 18, 2025"

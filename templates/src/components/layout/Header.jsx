@@ -3,7 +3,7 @@ import Container from "./Container";
 
 const Header = () => {
   return (
-    <Container className="bg-base-300 shadow-2xl border-b-2">
+    <Container className="bg-base-300 shadow-2xl border-b-2 fixed z-10">
       <div className="navbar w-full h-[60px] bg-transparent justify-between">
         <div className="navbar-start w-min">
           <div className="dropdown">
@@ -72,10 +72,10 @@ const Header = () => {
                 />
               </svg>
             </label>
-            <button className="px-3 py-2 bg-primary text-primary-content min-w-24">
+            <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
               <NavLink to="/auth/login">Dang nhap</NavLink>
             </button>
-            <button className="px-3 py-2 bg-primary text-primary-content min-w-24">
+            <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
               <NavLink to="/auth/register">Dang ki</NavLink>
             </button>
           </>

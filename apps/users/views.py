@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-
-# Create your views here.
-=======
 from django.shortcuts import render
 from django.contrib.auth import login,logout
 from rest_framework.views import APIView
@@ -73,4 +68,3 @@ class SigninView(APIView):
         user = UserModel.objects.create_user(username=username, email=email, password=password)
 
         return Response({"message": "Đăng ký thành công!"}, status=status.HTTP_201_CREATED)
->>>>>>> e02ec155c905935574bc80b059debf46e82bef66
