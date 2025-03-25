@@ -20,5 +20,5 @@ from apps.news.views import *
 from apps.users.views import *
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('api/',include('apps.urls'))
+    path('api/',include('apps.urls')),
 ]

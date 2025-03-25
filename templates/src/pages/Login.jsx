@@ -1,4 +1,8 @@
+import apiInstance from "../../api/axios";
+
 const Login = () => {
+  const {} = apiInstance.get("/login").then().catch();
+
   return (
     <div>
       <div class="flex items-center justify-center min-h-screen bg-[#f7fafc]">

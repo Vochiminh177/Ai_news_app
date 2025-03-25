@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 const Post = ({
   thumnail = "https://placehold.co/840x360",
@@ -6,6 +7,7 @@ const Post = ({
   publishDate,
   author,
   description,
+  id,
 }) => {
   return (
     <div className="card bg-base-100 shadow-xl w-[880px] p-5">
@@ -19,7 +21,9 @@ const Post = ({
         </p>
         <p>{description}</p>
         <div className="card-actions justify-start">
-          <button className="btn btn-primary">Xem them</button>
+          <button className="btn btn-primary">
+            <NavLink to={`/articles/${id}`}>Xem them</NavLink>
+          </button>
         </div>
       </div>
     </div>
