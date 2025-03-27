@@ -1,8 +1,8 @@
 from django.urls import path, include
-from .users.views import  LoginView, LogoutView,SigninView
+from .users.views import  LoginView, LogoutView,RegisterView
 
 urlpatterns = [
-    path('signin/', SigninView.as_view(), name='signin'),
+    path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path("v1/", include("apps.news.urls"))

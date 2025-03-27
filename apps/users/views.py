@@ -6,12 +6,13 @@ from rest_framework import status
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from .models import *
 from django.contrib.auth import get_user_model
 # Create your views here.
 UserModel = get_user_model()
 
 class LoginView(APIView):
-    def get(self, request):
+    def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
         print(request)
@@ -43,7 +44,7 @@ class LogoutView(APIView):
     
 
 
-class SigninView(APIView):
+class RegisterView(APIView):
     def post(self, request):
         username = request.data.get("username", "").strip()
         email = request.data.get("email", "").strip()
@@ -66,5 +67,6 @@ class SigninView(APIView):
 
         
         user = UserModel.objects.create_user(username=username, email=email, password=password)
-
+        default_role = Role.objects.get(role_name="user")
+        UserRole.objects.create(user=user , role=default_role)
         return Response({"message": "Đăng ký thành công!"}, status=status.HTTP_201_CREATED)
