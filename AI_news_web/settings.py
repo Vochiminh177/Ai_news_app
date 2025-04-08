@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'templates',
     'rest_framework',
     'apps.users',
+    'apps.news',
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,9 +82,9 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "news_website",
-        'USER': "root",
-        'PASSWORD': "",
+        'NAME': "django_db",
+        'USER': "django_user",
+        'PASSWORD': "django_password",
         'HOST': "localhost",
         'PORT': "3306",
         'OPTIONS': {
@@ -133,3 +136,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [],  # Tắt xác thực cho API
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],  # Cho phép tất cả request
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+CORS_ALLOW_ALL_ORIGINS = True
+

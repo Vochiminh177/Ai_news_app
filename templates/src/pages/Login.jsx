@@ -1,0 +1,64 @@
+import { useEffect, useState } from "react";
+import apiInstance from "../../api/axios";
+
+const Login = () => {
+  const [infoUser, setInfoUser] = useState({});
+  const [error, setError] = useState(null);
+  useEffect(() => {}, []);
+
+  return (
+    <div>
+      <div class="flex items-center justify-center min-h-screen bg-[#f7fafc]">
+        <form
+          action="{% url 'dang_nhap'%}"
+          method="post"
+          autocomplete="off"
+          class="w-[380px] h-[332px] rounded-xs shadow-md rounded bg-[#fff]"
+        >
+          <h1 class="mt-2 text-xl font-bold text-center">Welcom DNews</h1>
+          <ul class="mt-2 ml-3 text-red-700 bg-red-400">
+            <li></li>
+          </ul>
+          <label
+            for="email"
+            class="block mt-4 ml-8 text-sm font-bold text-gray-700"
+          >
+            email
+          </label>
+          <input
+            type="text"
+            name="email"
+            class="mt-1 w-[300px] px-3 py-2 ml-8 rounded border shadow-inner border-gray-300 bg-[#f7fafc] rounded-xs"
+          />
+          <br />
+          <label
+            for="password"
+            class="block mt-3 ml-8 text-sm font-bold text-gray-700"
+          >
+            password
+          </label>
+          <input
+            type="password"
+            name="password"
+            class="mt-1 w-[300px] px-3 py-2 ml-8 rounded border border-gray-300 shadow-inner bg-[#f7fafc] rounded-xs"
+          />
+          <br />
+
+          <button
+            type="submit"
+            class="justify-center block px-8 py-2 mx-auto mt-6 text-gray-200 bg-blue-600 rounded hover:bg-blue-800"
+          >
+            Đăng nhập
+          </button>
+
+          <span class="block mx-auto mt-3 text-center">
+            Bạn chưa có tài khoản
+            <a class="text-blue-700">Đăng ký</a>
+          </span>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
