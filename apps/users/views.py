@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from .models import *
 from django.contrib.auth import get_user_model
 from .models import *
 # Create your views here.
@@ -15,8 +16,11 @@ UserModel = get_user_model()
 
 class LoginView(APIView):
     def post(self, request):
+<<<<<<< HEAD
+=======
         #step 1:lấy dữ liêu
         print("Dữ liệu nhận được:", request.data)
+>>>>>>> feat/post
         email = request.data.get('email')
         password = request.data.get('password')
         #step 2 : Kiểm tra nhập liệu 
@@ -48,7 +52,7 @@ class LogoutView(APIView):
     
 
 
-class SigninView(APIView):
+class RegisterView(APIView):
     def post(self, request):
         authentication_classes = [SessionAuthentication, BasicAuthentication]  # Có thể bỏ trống []
         permission_classes = [AllowAny]  # Cho phép mọi request, không cần xác thực
@@ -74,8 +78,13 @@ class SigninView(APIView):
 
         #step 4: khởi tạo user
         user = UserModel.objects.create_user(username=username, email=email, password=password)
+<<<<<<< HEAD
+        default_role = Role.objects.get(role_name="user")
+        UserRole.objects.create(user=user , role=default_role)
+=======
         #step 5: tự động tạo quyền user trong bảng UserRole
         role_id=Role.objects.get(role_name='user')
         user.roles.add(role_id)
 
+>>>>>>> feat/post
         return Response({"message": "Đăng ký thành công!"}, status=status.HTTP_201_CREATED)

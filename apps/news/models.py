@@ -46,6 +46,8 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.username} likes {self.article.title}"
     
+<<<<<<< HEAD
+=======
 class Role(models.Model):
     role_id =models.CharField(max_length=255)
     role_name = models.CharField(max_length=255)
@@ -67,3 +69,4 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.name
+>>>>>>> feat/post
