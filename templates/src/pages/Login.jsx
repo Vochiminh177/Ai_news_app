@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
 
 const Login = () => {
-  const {} = apiInstance.get("/login").then().catch();
+  const [infoUser, setInfoUser] = useState({});
+  const [error, setError] = useState(null);
+  useEffect(() => {}, []);
 
   return (
     <div>

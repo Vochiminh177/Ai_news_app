@@ -17,7 +17,7 @@ class Article(models.Model):
     article_id =models.CharField(max_length=255)
     title =models.CharField(max_length=255)
     description = models.TextField(blank=True , null=True)
-    img= models.TextField(blank=True,null=True)
+    img= models.ImageField(upload_to="thumbnails/", null=False, blank=False, default='default.jpg')
     content = models.TextField()
     created_at =models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
