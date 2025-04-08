@@ -10,7 +10,7 @@ const Post = ({
   id,
 }) => {
   return (
-    <div className="card bg-base-100 shadow-xl w-[880px] p-5">
+    <div className="card bg-base-100 shadow-xl w-[880px] p-5 mb-5">
       <figure className="w-full h-[368px] object-cover">
         <img src={thumnail} alt="Shoes" />
       </figure>

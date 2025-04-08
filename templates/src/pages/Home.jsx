@@ -1,18 +1,46 @@
+import { useEffect, useState } from "react";
 import Container from "../components/layout/Container";
 import Sidebar from "../components/layout/Sidebar";
 import Post from "../components/ui/Post";
 import ToggleTheme from "../components/ui/ToggleTheme";
+import apiInstance from "../../api/axios";
+import useArticleStore from "../store/useArticleStore";
+import convertTime from "../utils/convertTime";
 
 const Home = () => {
+  const { articles, setArticle } = useArticleStore();
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    console.log("RUNNING");
+    apiInstance
+      .get("/articles/")
+      .then((res) => {
+        setArticle(res.data);
+      })
+      .catch((err) => {
+        setError(true);
+      });
+  }, [setArticle]);
+
   return (
     <Container className="">
       <div className="flex justify-between py-28">
-        <Post
-          title="Breaking News: New Technology Revolutionizing the Industry"
-          publishDate="March 18, 2025"
-          author="Jane Doe"
-          description="A new technology has emerged that is expected to revolutionize the industry. Experts are excited about the potential impact this could have on businesses and consumers alike."
-        />
+        <div className="">
+          {articles.length !== 0 ? (
+            articles.map((article) => (
+              <Post
+                title={article.title}
+                publishDate={convertTime(article.created_at)}
+                author="Jane Doe"
+                description={article.description}
+                thumnail={`http://localhost:8000${article.img}`}
+                id={article.id}
+              />
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
         <Sidebar />
       </div>
       <ToggleTheme />

@@ -41,10 +41,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.users',
     'apps.news',
+<<<<<<< HEAD
     'corsheaders',
+=======
+    "corsheaders"
+>>>>>>> feat/post
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -140,5 +145,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
-    
+    'DEFAULT_AUTHENTICATION_CLASSES': [],  # Tắt xác thực cho API
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],  # Cho phép tất cả request
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+CORS_ALLOW_ALL_ORIGINS = True
+
