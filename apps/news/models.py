@@ -1,7 +1,6 @@
 from django.db import models
 from ..users.models import UserModel
 class Category(models.Model):
-    category_id =models.CharField(max_length=255)
     category_name =models.CharField(max_length=255,unique=True)
     created_at= models.DateTimeField(auto_now_add=True)
 
@@ -14,7 +13,6 @@ class Article(models.Model):
         ('published','Published'),
         ('rejected','Rejected'),
     ]
-    article_id =models.CharField(max_length=255)
     title =models.CharField(max_length=255)
     description = models.TextField(blank=True , null=True)
     img= models.ImageField(upload_to="thumbnails/", null=False, blank=False, default='default.jpg')
@@ -31,7 +29,6 @@ class Article(models.Model):
 
     
 class Comment(models.Model):
-    comment_id =models.CharField(max_length=255)
     content =models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
