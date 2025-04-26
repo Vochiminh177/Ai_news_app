@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class Role(models.Model):
@@ -10,7 +11,12 @@ class Role(models.Model):
         return self.role_name
 class UserModel(AbstractUser):
     email = models.EmailField(unique=True)
-    avatar = models.CharField(max_length=255,blank=True,null=True)
+    avatar = models.ImageField(
+        upload_to='avatars/',  
+        blank=True,           
+        null=True,     
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])] 
+    )
     created_at =models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user_status = models.IntegerField(default=1)
