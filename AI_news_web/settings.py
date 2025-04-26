@@ -41,11 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.users',
     'apps.news',
-<<<<<<< HEAD
-    'corsheaders',
-=======
-    "corsheaders"
->>>>>>> feat/post
+    "corsheaders",
 ]
 
 MIDDLEWARE = [

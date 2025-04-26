@@ -14,7 +14,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await apiInstance.get("api/users");
+        const response = await apiInstance.get("/users");
         setUsers(response.data);
       } catch (error) {
         console.error("Lỗi lấy dữ liệu ", error);
@@ -27,7 +27,7 @@ const Users = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await apiInstance.get("api/role");
+        const response = await apiInstance.get("/role");
         setRoleList(response.data);
       } catch (error) {
         console.error("Lỗi lấy vai trò", error);
@@ -38,7 +38,7 @@ const Users = () => {
   //Hàm xem chi tiết
   const HandleViewDetail = async (userID) => {
     try {
-      const response = await apiInstance.get(`api/user/${userID}/`);
+      const response = await apiInstance.get(`/user/${userID}/`);
       setSelectedUser(response.data);
     } catch (error) {
       console.error("Lỗi lấy chi tiết user:", error);
@@ -48,7 +48,7 @@ const Users = () => {
   const HandleSearch = async (searchTerm) => {
     if (search.trim() === "") {
       try {
-        const response = await apiInstance.get("/api/users");
+        const response = await apiInstance.get("/users");
         setUsers(response.data);
       } catch (error) {
         console.error("Lỗi lấy dữ liệu người dùng:", error);
@@ -56,7 +56,7 @@ const Users = () => {
     } else {
       try {
         const response = await apiInstance.get(
-          `/api/users/search/?search=${searchTerm}`
+          `/users/search/?search=${searchTerm}`
         );
         setUsers(response.data);
       } catch (error) {
@@ -81,7 +81,7 @@ const Users = () => {
         formData.append("role", roleId);
       });
       const response = await apiInstance.put(
-        `api/user/edit/${editUser.id}/`,
+        `/user/edit/${editUser.id}/`,
         formData,
         {
           headers: {
@@ -114,7 +114,7 @@ const Users = () => {
       )
     );
     try {
-      await apiInstance.put(`api/user/status/${userID}/`, {
+      await apiInstance.put(`/user/status/${userID}/`, {
         user_status: newStatus,
       });
     } catch (error) {

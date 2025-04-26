@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [user, setUser] = useState({

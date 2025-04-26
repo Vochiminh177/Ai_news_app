@@ -13,7 +13,7 @@ const Permission = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await apiInstance.get("api/role/");
+        const response = await apiInstance.get("/role/");
         setRoles(response.data);
       } catch (error) {
         console.error("Lỗi lấy dữ liệu ", error);
@@ -27,7 +27,7 @@ const Permission = () => {
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
-        const response = await apiInstance.get("api/permission/");
+        const response = await apiInstance.get("/permission/");
         setPermissionList(response.data);
       } catch (error) {
         console.error("Lỗi lấy danh sách quyền: ", error);
@@ -48,7 +48,7 @@ const Permission = () => {
         return;
       }
 
-      const res = await apiInstance.post("api/role/create/", {
+      const res = await apiInstance.post("/role/create/", {
         role_name: roleName,
         permission_ids: selectedPermissions,
       });
@@ -65,7 +65,7 @@ const Permission = () => {
   //Hàm lấy quyền
   const HandleGetRole = async (roleId) => {
     try {
-      const response = await apiInstance.get(`api/role/${roleId}/`);
+      const response = await apiInstance.get(`/role/${roleId}/`);
       setEditRole({ id: roleId });
       setRoleName(response.data.role_name);
       setSelectedPermissions(response.data.permissions.map((p) => p.id));
@@ -77,7 +77,7 @@ const Permission = () => {
   //Hàm sửa vai trò
   const HandleEditRole = async () => {
     try {
-      const response = await apiInstance.put(`api/role/edit/${editRole.id}/`, {
+      const response = await apiInstance.put(`/role/edit/${editRole.id}/`, {
         role_name: roleName,
         permission_ids: selectedPermissions,
       });

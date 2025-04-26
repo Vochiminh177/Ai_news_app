@@ -11,7 +11,7 @@ const DefaultLayout = () => {
           <SidebarAdmin />
         </div>
         <div className="w-full ml-[300px] min-w-screen ">
-          <Users />
+          <Permission />
         </div>
       </div>
     </>

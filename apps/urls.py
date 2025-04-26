@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .users.views import  *
 from .views import get_login ,get_signin,get_home,get_admin
-urlpatterns = [
+v1_urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
@@ -15,6 +15,9 @@ urlpatterns = [
     path('role/edit/<int:role_id>/',RoleEditAPIView.as_view(),name="role-edit"),
     path('role/create/',RoleCreateAPIView.as_view(),name="role-create"),
     path('permission/',GetAllPermission.as_view(),name="permission-list"),
-    path("v1/", include("apps.news.urls"))
+    
 ]
-
+urlpatterns = [
+    path("v1/", include("apps.news.urls")),
+    path("v1/",include((v1_urlpatterns,"v1")))
+]
