@@ -1,7 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Container from "./Container";
+import useArticleStore from "../../store/useArticleStore";
+import { useState } from "react";
+import apiInstance from "../../../api/axios";
+import useAuthStore from "../../store/useAuthStore";
 
 const Header = () => {
+  const { setArticle } = useArticleStore();
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const { isAuth } = useAuthStore();
+
+  const handleSearch = () => {
+    apiInstance
+      .get(`/articles/search?key=${search}`)
+      .then((res) => {
+        setArticle(res.data);
+        setSearch("");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Container className="bg-base-300 shadow-2xl border-b-2 fixed z-10">
       <div className="navbar w-full h-[60px] bg-transparent justify-between">
@@ -52,13 +74,19 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex px-10 gap-9">
           <NavLink to="/">Trang chu</NavLink>
           <NavLink to="/tech">Cong nghe</NavLink>
-          <NavLink to="/support">The thao</NavLink>
+          <NavLink to="/sport">The thao</NavLink>
           <NavLink to="/game">Game</NavLink>
         </div>
         <div className="navbar-end gap-2">
-          <>
-            <label className="input input-bordered flex items-center gap-2 input-sm mr-2 lg:w-[280px]">
-              <input type="text" className="grow" placeholder="Search" />
+          <label className="input input-bordered flex items-center gap-2 input-sm mr-2 lg:w-[280px]">
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search"
+              onChange={(e) => setSearch(e.target.value)}
+              value={search}
+            />
+            <button onClick={handleSearch}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -71,14 +99,68 @@ const Header = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </label>
-            <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
-              <NavLink to="/auth/login">Dang nhap</NavLink>
             </button>
-            <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
-              <NavLink to="/auth/register">Dang ki</NavLink>
-            </button>
-          </>
+          </label>
+          {isAuth ? (
+            <>
+              <div class="dropdown dropdown-hover">
+                <div tabindex="0" className="cursor-pointer">
+                  <div class="avatar">
+                    <div class="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2">
+                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    </div>
+                  </div>
+                </div>
+                <ul
+                  tabindex="0"
+                  class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                  <li>
+                    <NavLink
+                      to="/account/"
+                      end
+                      className={({ isActive }) =>
+                        isActive ? "bg-primary text-primary-content" : ""
+                      }
+                    >
+                      Thong tin tai khoan
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/account/article"
+                      end
+                      className={({ isActive }) =>
+                        isActive ? "bg-primary text-primary-content" : ""
+                      }
+                    >
+                      Bai viet cua ban
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/account/new_article"
+                      end
+                      className={({ isActive }) =>
+                        isActive ? "bg-primary text-primary-content" : ""
+                      }
+                    >
+                      Tao bai viet moi
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
+                <NavLink to="/auth/login">Dang nhap</NavLink>
+              </button>
+              <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
+                <NavLink to="/auth/register">Dang ki</NavLink>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </Container>

@@ -1,31 +1,33 @@
 from django.shortcuts import render
 from .models import Article
-from .serializer import ArticleSerializer
-from rest_framework.decorators import api_view
+from .serializer import ArticleSerializer, CategorySerializer
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 # Create your views here.
 @api_view(["GET", "POST"])
+@parser_classes([MultiPartParser, FormParser])
 def article_list (req):
     if req.method == "GET":
         articles = Article.objects.all()
-        print(articles)
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     if req.method == "POST":
         serializer = ArticleSerializer(data=req.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=201)
+        print(serializer.errors)
+        return Response(serializer.errors, status=400)
 
 @api_view(["GET", "PUT", "DELETE"])
 def article_detail(req, pk):
     try:
-        article = Article.objects.get(pk=pk)
+        article = Article.objects.get(id=pk)
     except Article.DoesNotExist:
         return Response({"error": "Not Found Article"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -77,3 +79,14 @@ def article_status(req):
         articles = Article.objects.filter(status=status_article)
         serializer = ArticleSerializer(articles, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET", "POST"]) 
+def category_detail(req):
+    if req.method == "POST":
+        serializer = CategorySerializer(data = req.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        print(serializer.errors)
+        return Response(serializer.errors, status=400)

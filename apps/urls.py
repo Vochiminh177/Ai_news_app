@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .users.views import  *
-
+from .views import get_login ,get_signin,get_home,get_admin
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
@@ -17,3 +17,4 @@ urlpatterns = [
     path('permission/',GetAllPermission.as_view(),name="permission-list"),
     path("v1/", include("apps.news.urls"))
 ]
+

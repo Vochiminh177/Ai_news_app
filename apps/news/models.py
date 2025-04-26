@@ -1,7 +1,6 @@
 from django.db import models
 from ..users.models import UserModel
 class Category(models.Model):
-    category_id =models.CharField(max_length=255)
     category_name =models.CharField(max_length=255,unique=True)
     created_at= models.DateTimeField(auto_now_add=True)
 
@@ -14,10 +13,9 @@ class Article(models.Model):
         ('published','Published'),
         ('rejected','Rejected'),
     ]
-    article_id =models.CharField(max_length=255)
     title =models.CharField(max_length=255)
     description = models.TextField(blank=True , null=True)
-    img= models.TextField(blank=True,null=True)
+    img= models.ImageField(upload_to="thumbnails/", null=False, blank=False, default='default.jpg')
     content = models.TextField()
     created_at =models.DateTimeField(auto_now_add=True)
     updated_at =models.DateTimeField(auto_now=True)
@@ -31,7 +29,6 @@ class Article(models.Model):
 
     
 class Comment(models.Model):
-    comment_id =models.CharField(max_length=255)
     content =models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at= models.DateTimeField(auto_now=True)
@@ -49,3 +46,27 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.username} likes {self.article.title}"
     
+<<<<<<< HEAD
+=======
+class Role(models.Model):
+    role_id =models.CharField(max_length=255)
+    role_name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        # constraints = [
+        #     models.UniqueConstraint(fields=['user', 'role'], name='unique_user_role')
+        # ]
+        pass
+    def __str__(self):
+        return self.role_name
+
+
+class Permission(models.Model):
+    per_id =models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+>>>>>>> feat/post
