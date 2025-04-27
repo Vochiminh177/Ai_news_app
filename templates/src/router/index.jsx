@@ -8,7 +8,9 @@ import Category from "../pages/Category";
 import NewArticlePage from "../pages/NewArticlePage";
 import AccountDetail from "../pages/AccountDetail";
 import ArticleEditor from "../pages/ArticleEditor";
-
+import ArticleAdmin from "../pages/ArticleAdmin";
+import Permission from "../pages/Permission";
+import Users from "../pages/Users";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +41,18 @@ const router = createBrowserRouter([
             element: <ArticleEditor />,
           },
         ],
+      },
+      {
+        path: "admin/articles/",
+        element: <ArticleAdmin />,
+      },
+      {
+        path: "admin/permission/",
+        element: <Permission />,
+      },
+      {
+        path: "admin/users/",
+        element: <Users />,
       },
     ],
   },

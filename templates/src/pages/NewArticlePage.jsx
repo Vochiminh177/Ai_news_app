@@ -7,14 +7,14 @@ const NewArticlePage = () => {
   return (
     <Container className="py-28">
       <div className="card w-full bg-base-100 card-xl shadow-xl min-h-[calc(100vh-200px)]">
-        <div className="card-body flex flex-col">
+        <div className="flex flex-col card-body">
           <textarea
             name=""
             id=""
-            className="w-full flex-1 bg-transparent p-2"
+            className="flex-1 w-full p-2 bg-transparent"
             placeholder="Nhap tai day"
           ></textarea>
-          <div className="w-full flex justify-between items-center">
+          <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-4">
               <button>
                 <b>B</b>
@@ -36,10 +36,10 @@ const NewArticlePage = () => {
               </button>
             </div>
             <div className="flex gap-3">
-              <button className="text-primary-content bg-primary px-3 py-2 min-w-20 font-semibold rounded">
+              <button className="px-3 py-2 font-semibold rounded text-primary-content bg-primary min-w-20">
                 Dang bai
               </button>
-              <button className="text-primary-content bg-primary px-3 py-2 min-w-20 font-semibold rounded">
+              <button className="px-3 py-2 font-semibold rounded text-primary-content bg-primary min-w-20">
                 Huy
               </button>
             </div>

@@ -6,6 +6,7 @@ import {
   ArrowLeftEndOnRectangleIcon,
   ShieldCheckIcon,
 } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 const SidebarAdmin = () => {
   return (
     <div className="h-screen w-[280px] shadow-[2px_2px_4px_0_rgba(0,0,0,0.3)] p-4 whitespace-nowrap flex flex-col justify-between bg-slate-100">
@@ -21,11 +22,11 @@ const SidebarAdmin = () => {
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <DocumentTextIcon className="w-6 h-6" />
-            <span>Danh sách bài viết</span>
+            <NavLink to="/admin/articles">Danh sách bài viết</NavLink>
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <UserGroupIcon className="w-6 h-6" />
-            <span>Danh sách người dùng</span>
+            <NavLink to="/admin/users">Danh sách người dùng</NavLink>
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <UserCircleIcon className="w-6 h-6" />
@@ -33,7 +34,7 @@ const SidebarAdmin = () => {
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <ShieldCheckIcon className="w-6 h-6" />
-            <span>Phân quyền</span>
+            <NavLink to="/admin/permission">Danh sách bài viết</NavLink>
           </li>
         </ul>
       </div>

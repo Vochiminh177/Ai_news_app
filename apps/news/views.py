@@ -57,7 +57,6 @@ def article_category(req):
 def search_article(req):
     if req.method == "GET":
         key_search = req.GET.get("key", "")
-        print(key_search)
         articles = Article.objects.filter(Q(title__icontains = key_search)| Q(content__icontains=key_search))
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -99,6 +98,7 @@ def get_all_category(req):
         serializer = CategorySerializer(category, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+#Đổi trạng thái 
 @api_view(["PUT"])
 def update_status_article(req,pk):
     if req.method == "PUT":
@@ -112,3 +112,34 @@ def update_status_article(req,pk):
         article.status = status_a
         article.save()
         return Response({'status':article.status},status=status.HTTP_200_OK)
+    
+# Tìm kiếm nâng cao
+@api_view(["GET"])
+def advanced_search_article(req):
+    if req.method == "GET":
+        key_search = req.GET.get("key", "")
+        status_filter = req.GET.get("status","")
+        category_id = req.GET.get("category","")
+        from_date = req.GET.get("from_date","")
+        to_date = req.GET.get("to_date","")
+        sort = req.GET.get('sort',"")
+        articles = Article.objects.all()
+        if key_search:
+            articles = articles.filter(
+                Q(title__icontains = key_search)| Q(content__icontains=key_search ) |Q(description__icontains=key_search )
+            )     
+        if status_filter:
+            articles = articles.filter(status = status_filter ) 
+        if category_id:
+            articles = articles.filter(category = category_id)
+        
+        if from_date:
+            articles = articles.filter(created_at__gte=from_date)
+        if to_date:
+            articles = articles.filter(created_at__lte=to_date)
+        
+        if sort == "new":
+            articles= articles.order_by("created_at")
+        serializer = ArticleSerializer(articles,many = True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+        

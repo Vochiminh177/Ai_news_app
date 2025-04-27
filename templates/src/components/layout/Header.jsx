@@ -25,14 +25,14 @@ const Header = () => {
   };
 
   return (
-    <Container className="bg-base-300 shadow-2xl border-b-2 fixed z-10">
+    <Container className="fixed z-10 border-b-2 shadow-2xl bg-base-300">
       <div className="navbar w-full h-[60px] bg-transparent justify-between">
         <div className="navbar-start w-min">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="w-5 h-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -48,7 +48,7 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box z-1 w-52"
             >
               <li>
                 <a>Item 1</a>
@@ -71,13 +71,13 @@ const Header = () => {
           </div>
           <p className="text-3xl font-playwrite">DNews</p>
         </div>
-        <div className="navbar-center hidden lg:flex px-10 gap-9">
+        <div className="hidden px-10 navbar-center lg:flex gap-9">
           <NavLink to="/">Trang chu</NavLink>
           <NavLink to="/tech">Cong nghe</NavLink>
           <NavLink to="/sport">The thao</NavLink>
           <NavLink to="/game">Game</NavLink>
         </div>
-        <div className="navbar-end gap-2">
+        <div className="gap-2 navbar-end">
           <label className="input input-bordered flex items-center gap-2 input-sm mr-2 lg:w-[280px]">
             <input
               type="text"
@@ -91,7 +91,7 @@ const Header = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="h-4 w-4 opacity-70"
+                className="w-4 h-4 opacity-70"
               >
                 <path
                   fillRule="evenodd"
@@ -153,10 +153,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
+              <button className="px-3 py-2 rounded bg-primary text-primary-content min-w-24">
                 <NavLink to="/auth/login">Dang nhap</NavLink>
               </button>
-              <button className="px-3 py-2 bg-primary text-primary-content min-w-24 rounded">
+              <button className="px-3 py-2 rounded bg-primary text-primary-content min-w-24">
                 <NavLink to="/auth/register">Dang ki</NavLink>
               </button>
             </>
