@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article
+from .models import Article,Category
 from .serializer import ArticleSerializer, CategorySerializer
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
@@ -90,3 +90,25 @@ def category_detail(req):
             return Response(serializer.data, status=201)
         print(serializer.errors)
         return Response(serializer.errors, status=400)
+    
+#Lấy all thể loại cho combobox (hào)
+@api_view(["GET"])
+def get_all_category(req):
+    if req.method == "GET":
+        category = Category.objects.all()
+        serializer = CategorySerializer(category, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["PUT"])
+def update_status_article(req,pk):
+    if req.method == "PUT":
+        try: 
+            article = Article.objects.get(id=pk)
+        except Article.DoesNotExist:
+            return Response({"error": "Article not found"}, status=status.HTTP_404_NOT_FOUND)
+        status_a = req.data.get('status')
+        if status_a not in dict(Article.STATUS_CHOICES).keys():
+            return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
+        article.status = status_a
+        article.save()
+        return Response({'status':article.status},status=status.HTTP_200_OK)

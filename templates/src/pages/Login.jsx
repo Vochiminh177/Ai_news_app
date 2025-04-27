@@ -19,7 +19,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await apiInstance.post("api/login/", {
+      const response = await apiInstance.post("/login/", {
         email,
         password,
       });

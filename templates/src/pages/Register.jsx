@@ -21,7 +21,7 @@ const Register = () => {
     setError("");
     setMessage("");
     try {
-      const response = await apiInstance.post("api/register/", formData);
+      const response = await apiInstance.post("register/", formData);
       setMessage(response.data.message || "Đăng ký thành công!");
       setFormData({
         username: "",

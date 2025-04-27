@@ -60,7 +60,7 @@ const ArticleEditor = () => {
     <Container className="pt-32">
       <form
         onSubmit={handleSubmit}
-        className="w-full h-max bg-base-300 rounded-lg shadow-lg shadow-base-100 p-5"
+        className="w-full p-5 rounded-lg shadow-lg h-max bg-base-300 shadow-base-100"
       >
         <div>
           <span>Nhap tieu de</span>
@@ -90,7 +90,7 @@ const ArticleEditor = () => {
 
         <div
           id="custom-toolbar"
-          className="toolbar-bottom flex justify-between"
+          className="flex justify-between toolbar-bottom"
         >
           <span className="ql-formats">
             <button className="ql-bold" />
