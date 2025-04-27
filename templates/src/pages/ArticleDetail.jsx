@@ -30,9 +30,9 @@ const ArticleDetail = () => {
   return (
     <Container className="">
       <div className="flex justify-between gap-5 py-28 ">
-        <div className="card w-full bg-base-100 card-xl shadow-xl">
+        <div className="w-full shadow-xl card bg-base-100 card-xl">
           <div className="card-body">
-            <h2 className="card-title flex justify-between items-center">
+            <h2 className="flex items-center justify-between card-title">
               {article.title}
               <button onClick={handleLike}>
                 <HeartIcon like={like} />
