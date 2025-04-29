@@ -152,21 +152,21 @@ const Users = () => {
       <h1 className="mt-3 text-3xl font-bold">Danh sách người dùng </h1>
       <div className="flex gap-4 my-4">
         <input
-          className="px-2 py-3 bg-base-200 shadow-lg rounded w-64"
+          className="w-64 px-2 py-3 rounded shadow-lg bg-base-200"
           type="text"
           placeholder="Bạn cần tìm gì ?"
           onChange={(e) => setSearch(e.target.value)}
         />
         <button
           onClick={() => HandleSearch(search)}
-          className="px-3 py-2 bg-primary text-primary-content rounded font-medium"
+          className="px-3 py-2 font-medium rounded bg-primary text-primary-content"
         >
           Tìm kiếm
         </button>
       </div>
       <div>
         {users.length === 0 ? (
-          <div className="text-center font-bold w-full text-3xl h-40 flex justify-center items-center">
+          <div className="flex items-center justify-center w-full h-40 text-3xl font-bold text-center">
             <p>Không có dữ liệu</p>
           </div>
         ) : (

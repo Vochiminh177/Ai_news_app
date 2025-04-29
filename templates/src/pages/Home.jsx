@@ -35,6 +35,7 @@ const Home = () => {
                 description={article.description}
                 thumnail={`http://localhost:8000${article.img}`}
                 id={article.id}
+                key={article.id}
               />
             ))
           ) : (

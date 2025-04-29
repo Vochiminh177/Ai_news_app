@@ -131,15 +131,15 @@ const ArticleAdmin = () => {
   return (
     <Container>
       <h1 className="text-3xl font-bold">Bài viết</h1>
-      <div className="my-5 flex gap-4">
+      <div className="flex gap-4 my-5">
         <input
           type="text"
-          className="bg-base-200 shadow-lg px-2 py-3 rounded w-64"
+          className="w-64 px-2 py-3 rounded shadow-lg bg-base-200"
           placeholder="Bạn cần tìm gì ?"
           onChange={(e) => setSearch(e.target.value)}
         />
         <button
-          className="bg-primary text-primary-content font-medium px-2 rounded py-3 h-full"
+          className="h-full px-2 py-3 font-medium rounded bg-primary text-primary-content"
           onClick={() => HandleSearch(search)}
         >
           Tìm kiếm

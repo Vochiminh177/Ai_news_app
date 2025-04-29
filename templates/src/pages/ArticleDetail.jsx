@@ -13,6 +13,7 @@ const ArticleDetail = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    let isCalled = false;
     apiInstance
       .get(`articles/${Number(id)}/`)
       .then((res) => {
@@ -21,6 +22,10 @@ const ArticleDetail = () => {
       .catch((err) => {
         setError(err);
       });
+    if (!isCalled) {
+      apiInstance.put(`articles/add_view/${Number(id)}/`);
+      isCalled = true;
+    }
   }, []);
 
   const handleLike = () => {

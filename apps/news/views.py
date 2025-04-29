@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Q
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from django.db.models.functions import ExtractMonth, ExtractQuarter
+from django.db.models import Count
 
 # Create your views here.
 @api_view(["GET", "POST"])
@@ -143,3 +144,50 @@ def advanced_search_article(req):
         serializer = ArticleSerializer(articles,many = True)
         return Response(serializer.data , status=status.HTTP_200_OK)
         
+@api_view(["GET"])
+def stats_article(req):
+    if req.method == "GET":
+        mode = req.GET.get('mode', 'month')  
+        year = req.GET.get('year', '2025')
+
+        articles = Article.objects.all()
+
+    # Nếu có năm thì lọc theo năm
+        if year:
+            articles = articles.filter(created_at__year=year)
+
+        if mode == 'month':
+            stats = articles.annotate(
+                month=ExtractMonth('created_at')
+            ).values('month').annotate(
+                total=Count('id')
+            ).order_by('month')
+
+            data = {f"{item['month']:02d}": item['total'] for item in stats}
+
+        elif mode == 'quarter':
+            stats = articles.annotate(
+                quarter=ExtractQuarter('created_at')
+            ).values('quarter').annotate(
+                total=Count('id')
+            ).order_by('quarter')
+
+            data = {f"Q{item['quarter']}": item['total'] for item in stats}
+
+        else:
+            return Response({"error": "mode phải là 'month' hoặc 'quarter'"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(data, status=status.HTTP_200_OK)
+    
+@api_view(["PUT"])
+def add_view_article_detail(req, pk):
+    try:
+        article = Article.objects.get(id=pk)
+    except Article.DoesNotExist:
+        return Response({"error": "Not Found Article"}, status=status.HTTP_404_NOT_FOUND)
+    
+    if req.method == "PUT":
+        article.counter_view +=1
+        article.save()
+        serializer = ArticleSerializer(article)
+        return Response(serializer.data, status=status.HTTP_200_OK)

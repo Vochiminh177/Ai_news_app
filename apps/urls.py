@@ -14,8 +14,7 @@ v1_urlpatterns = [
     path('role/<int:role_id>/',GetRoleAPIView.as_view(),name="role-detail"),
     path('role/edit/<int:role_id>/',RoleEditAPIView.as_view(),name="role-edit"),
     path('role/create/',RoleCreateAPIView.as_view(),name="role-create"),
-    path('permission/',GetAllPermission.as_view(),name="permission-list"),
-    
+    path('permission/',GetAllPermission.as_view(),name="permission-list"),   
 ]
 urlpatterns = [
     path("v1/", include("apps.news.urls")),

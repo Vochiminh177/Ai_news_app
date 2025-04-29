@@ -14,6 +14,7 @@ import Users from "../pages/Users";
 import DashboardLayout from "../layout/DashboardLayout";
 import AccountLayout from "../layout/AccountLayout";
 import ArticleOfAccount from "../pages/ArticleOfAccount";
+import HomeAdmin from "../pages/HomeAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "users/",
         element: <Users />,
+      },
+      {
+        path: "home/",
+        element: <HomeAdmin />,
       },
     ],
   },

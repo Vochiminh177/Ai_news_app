@@ -19,7 +19,7 @@ const SidebarAdmin = () => {
         <ul>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <ChartBarIcon className="w-6 h-6" />
-            <span>Thống kê</span>
+            <NavLink to="/admin/home">Trang chính</NavLink>
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <DocumentTextIcon className="w-6 h-6" />
@@ -30,12 +30,8 @@ const SidebarAdmin = () => {
             <NavLink to="/admin/users">Danh sách người dùng</NavLink>
           </li>
           <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
-            <UserCircleIcon className="w-6 h-6" />
-            <span>Trang cá nhân</span>
-          </li>
-          <li className="flex items-end gap-4 mb-5 text-xl cursor-pointer flex-nowrap hover:text-blue-500">
             <ShieldCheckIcon className="w-6 h-6" />
-            <NavLink to="/admin/permission">Danh sách bài viết</NavLink>
+            <NavLink to="/admin/permission">Phân quyền</NavLink>
           </li>
         </ul>
       </div>
