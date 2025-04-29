@@ -1,6 +1,10 @@
 import { useState } from "react";
 import apiInstance from "../../api/axios";
+import useAuthStore from "../store/useAuthStore";
+import { data, useNavigate } from "react-router-dom";
 const Register = () => {
+  const { setIsAuth, setDataUser } = useAuthStore();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -29,6 +33,10 @@ const Register = () => {
         password: "",
         password2: "",
       });
+      setIsAuth(true);
+      setDataUser(response.data);
+      writeLocalStorage("user", data);
+      navigate("/");
     } catch (error) {
       setError(error.response?.data?.error || "Lỗi đăng ký!");
     } finally {

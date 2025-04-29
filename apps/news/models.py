@@ -21,6 +21,8 @@ class Article(models.Model):
     updated_at =models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True)
+    user_id = models.ForeignKey(UserModel, on_delete=models.SET_NULL, null=True, blank=True)
+    counter_view = models.IntegerField(default=0)
     def get_like_count(self):
         return self.likes.count()
     def __str__(self):

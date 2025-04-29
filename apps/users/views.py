@@ -85,7 +85,15 @@ class RegisterView(APIView):
         role_id=Role.objects.get(role_name='user')
         user.roles.add(role_id)
 
-        return Response({"message": "Đăng ký thành công!"}, status=status.HTTP_201_CREATED)
+        return Response({"message": "Đăng ký thành công!",
+                         "data": {
+                        "id": user.id,
+                        "username": user.username,
+                        "avatar": user.avatar,
+                        "email": user.email,
+                        "role": user.get_role(),
+                        }
+                        }, status=status.HTTP_201_CREATED)
 
 class GetAllUsers(APIView):
     def get(self,request):

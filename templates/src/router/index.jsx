@@ -11,6 +11,9 @@ import ArticleEditor from "../pages/ArticleEditor";
 import ArticleAdmin from "../pages/ArticleAdmin";
 import Permission from "../pages/Permission";
 import Users from "../pages/Users";
+import DashboardLayout from "../layout/DashboardLayout";
+import AccountLayout from "../layout/AccountLayout";
+import ArticleOfAccount from "../pages/ArticleOfAccount";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,24 +37,38 @@ const router = createBrowserRouter([
       },
       {
         path: "account/",
-        element: <DefaultLayout />,
+        element: <AccountLayout />,
         children: [
+          {
+            index: true,
+            element: <AccountDetail />,
+          },
           {
             path: "new_article/",
             element: <ArticleEditor />,
           },
+          {
+            path: "history/",
+            element: <ArticleOfAccount />,
+          },
         ],
       },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <DashboardLayout />,
+    children: [
       {
-        path: "admin/articles/",
+        path: "articles/",
         element: <ArticleAdmin />,
       },
       {
-        path: "admin/permission/",
+        path: "permission/",
         element: <Permission />,
       },
       {
-        path: "admin/users/",
+        path: "users/",
         element: <Users />,
       },
     ],

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
 import ModelDetail from "../components/layout/ModelDetail";
+import Container from "../components/layout/Container";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -147,70 +148,74 @@ const Users = () => {
     }
   };
   return (
-    <>
-      <h1 className="mt-3 text-3xl font-bold text-center">
-        Danh sách người dùng{" "}
-      </h1>
-      <div className="items-center justify-between mt-3">
+    <Container>
+      <h1 className="mt-3 text-3xl font-bold">Danh sách người dùng </h1>
+      <div className="flex gap-4 my-4">
         <input
-          className="px-3 mr-4 border border-gray-300 rounded-sm py"
+          className="px-2 py-3 bg-base-200 shadow-lg rounded w-64"
           type="text"
           placeholder="Bạn cần tìm gì ?"
           onChange={(e) => setSearch(e.target.value)}
         />
         <button
           onClick={() => HandleSearch(search)}
-          className="p-1 bg-blue-500 border rounded-lg hover:bg-blue-700 hover:text-white"
+          className="px-3 py-2 bg-primary text-primary-content rounded font-medium"
         >
           Tìm kiếm
         </button>
       </div>
       <div>
-        <table className="min-w-full mt-4 border border-collapse border-gray-300 table-auto">
-          <thead>
-            <tr>
-              <td className="px-4 py-2 border">ID</td>
-              <td className="px-4 py-2 border">UserName</td>
-              <td className="px-4 py-2 border">Email</td>
-              <td className="px-4 py-2 border">Avatar</td>
-              <td className="px-4 py-2 border">Trạng thái</td>
-              <td className="px-4 py-2 border">Xem chi tiết</td>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-100">
-                <td className="px-4 py-2 border">{user.id}</td>
-                <td className="px-4 py-2 border">{user.username}</td>
-                <td className="px-4 py-2 border">{user.email}</td>
-                <td className="px-4 py-2 border">
-                  <img
-                    src={user.avatar}
-                    alt="Avatar"
-                    className="w-12 h-12 rounded-full"
-                  />
-                </td>
-                <td className="px-4 py-2 border">
-                  {getStatusUser(user.user_status)}
-                </td>
-                <td className="px-4 py-2 text-center border">
-                  <button
-                    onClick={() => HandleViewDetail(user.id)}
-                    className="px-4 py-2 mr-3 text-white bg-blue-500 rounded-lg hover:bg-blue-700 "
-                  >
-                    Xem
-                  </button>
-                  <button
-                    onClick={() => HandleEditClick(user)}
-                    className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 "
-                  >
-                    Sửa
-                  </button>
-                </td>
+        {users.length === 0 ? (
+          <div className="text-center font-bold w-full text-3xl h-40 flex justify-center items-center">
+            <p>Không có dữ liệu</p>
+          </div>
+        ) : (
+          <table className="min-w-full mt-4 border border-collapse border-gray-300 table-auto">
+            <thead>
+              <tr>
+                <td className="px-4 py-2 border">ID</td>
+                <td className="px-4 py-2 border">UserName</td>
+                <td className="px-4 py-2 border">Email</td>
+                <td className="px-4 py-2 border">Avatar</td>
+                <td className="px-4 py-2 border">Trạng thái</td>
+                <td className="px-4 py-2 border">Xem chi tiết</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id} className="hover:bg-gray-100">
+                  <td className="px-4 py-2 border">{user.id}</td>
+                  <td className="px-4 py-2 border">{user.username}</td>
+                  <td className="px-4 py-2 border">{user.email}</td>
+                  <td className="px-4 py-2 border">
+                    <img
+                      src={user.avatar}
+                      alt="Avatar"
+                      className="w-12 h-12 rounded-full"
+                    />
+                  </td>
+                  <td className="px-4 py-2 border">
+                    {getStatusUser(user.user_status)}
+                  </td>
+                  <td className="px-4 py-2 text-center border">
+                    <button
+                      onClick={() => HandleViewDetail(user.id)}
+                      className="px-4 py-2 mr-3 text-white bg-blue-500 rounded-lg hover:bg-blue-700 "
+                    >
+                      Xem
+                    </button>
+                    <button
+                      onClick={() => HandleEditClick(user)}
+                      className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-700 "
+                    >
+                      Sửa
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {selectedUser && (
@@ -320,7 +325,7 @@ const Users = () => {
           </div>
         </ModelDetail>
       )}
-    </>
+    </Container>
   );
 };
 export default Users;

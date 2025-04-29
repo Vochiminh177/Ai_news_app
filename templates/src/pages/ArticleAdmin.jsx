@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import apiInstance from "../../api/axios";
 import ModelDetail from "../components/layout/ModelDetail";
 import ArticleDetail from "./ArticleDetail";
+import Container from "../components/layout/Container";
 const ArticleAdmin = () => {
   const [article, setArticle] = useState([]);
   const [search, setSearch] = useState("");
@@ -128,17 +129,17 @@ const ArticleAdmin = () => {
     }
   };
   return (
-    <>
-      <h1 className="text-3xl font-bold text-center ">Bài viết </h1>
-      <div className="mb-5">
+    <Container>
+      <h1 className="text-3xl font-bold">Bài viết</h1>
+      <div className="my-5 flex gap-4">
         <input
           type="text"
-          className="px-4 py-3 ml-16 mr-3 border border-gray-300 rounded-lg "
+          className="bg-base-200 shadow-lg px-2 py-3 rounded w-64"
           placeholder="Bạn cần tìm gì ?"
           onChange={(e) => setSearch(e.target.value)}
         />
         <button
-          className="text-white bg-blue-500 cursor-pointer btn hover:bg-blue-700"
+          className="bg-primary text-primary-content font-medium px-2 rounded py-3 h-full"
           onClick={() => HandleSearch(search)}
         >
           Tìm kiếm
@@ -243,7 +244,7 @@ const ArticleAdmin = () => {
           </div>
         </ModelDetail>
       )}
-    </>
+    </Container>
   );
 };
 export default ArticleAdmin;

@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/useAuthStore";
+import { writeLocalStorage } from "../utils/actionLocalStorage";
 const Login = () => {
-  const [user, setUser] = useState({
-    email: "",
-    user_id: "",
-    message: "",
-    role: "",
-  });
+  const { setIsAuth, setDataUser } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,8 +20,11 @@ const Login = () => {
         email,
         password,
       });
-      setUser(response.data);
       alert("Đăng nhập thành công!");
+      setDataUser(response.data);
+      setIsAuth(true);
+      writeLocalStorage("user", response.data);
+
       navigate("/");
     } catch (error) {
       setError(error.response?.data?.error || "Lỗi đăng nhập");

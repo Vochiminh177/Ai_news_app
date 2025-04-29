@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
 import ModelDetail from "../components/layout/ModelDetail";
+import Container from "../components/layout/Container";
 const Permission = () => {
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -90,8 +91,8 @@ const Permission = () => {
     }
   };
   return (
-    <>
-      <h1 className="mt-3 text-3xl font-bold text-center">Danh sách quyền</h1>
+    <Container>
+      <h1 className="mt-3 text-3xl font-bold">Danh sách quyền</h1>
       <div className="items-center justify-between mt-3">
         <button
           onClick={() => setCreateRole(true)}
@@ -241,7 +242,7 @@ const Permission = () => {
           </div>
         </ModelDetail>
       )}
-    </>
+    </Container>
   );
 };
 export default Permission;
