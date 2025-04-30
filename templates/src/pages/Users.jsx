@@ -183,7 +183,7 @@ const Users = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-100">
+                <tr key={user.id} className="hover:bg-base-300 cursor-pointer">
                   <td className="px-4 py-2 border">{user.id}</td>
                   <td className="px-4 py-2 border">{user.username}</td>
                   <td className="px-4 py-2 border">{user.email}</td>

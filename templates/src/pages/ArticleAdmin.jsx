@@ -3,6 +3,7 @@ import apiInstance from "../../api/axios";
 import ModelDetail from "../components/layout/ModelDetail";
 import ArticleDetail from "./ArticleDetail";
 import Container from "../components/layout/Container";
+import convertTime from "../utils/convertTime";
 const ArticleAdmin = () => {
   const [article, setArticle] = useState([]);
   const [search, setSearch] = useState("");
@@ -232,7 +233,7 @@ const ArticleAdmin = () => {
                 <h2 className="flex items-center justify-between card-title ">
                   {selectedArticle.title}
                 </h2>
-                <p>{selectedArticle.created_at}</p>
+                <p>{convertTime(selectedArticle.created_at)}</p>
                 <div>
                   <img
                     src={`http://localhost:8000${selectedArticle.img}`}
@@ -240,9 +241,10 @@ const ArticleAdmin = () => {
                     className="w-full"
                   />
                 </div>
-                <div className="text-base text-base-content">
-                  {selectedArticle.content}
-                </div>
+                <div
+                  className="text-base text-base-content"
+                  dangerouslySetInnerHTML={{ __html: selectedArticle.content }}
+                ></div>
               </div>
             </div>
           </div>

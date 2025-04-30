@@ -96,7 +96,7 @@ const Permission = () => {
       <div className="items-center justify-between mt-3">
         <button
           onClick={() => setCreateRole(true)}
-          className="p-1 bg-blue-500 border rounded-lg hover:bg-blue-700 hover:text-white"
+          className="btn btn-wide bg-primary text-primary-content hover:bg-primary text-base font-semibold"
         >
           Thêm quyền
         </button>
@@ -115,7 +115,7 @@ const Permission = () => {
           </thead>
           <tbody>
             {roles.map((role) => (
-              <tr key={role.id} className="hover:bg-gray-100">
+              <tr key={role.id} className="hover:bg-base-300 cursor-pointer">
                 <td className="px-4 py-2 border">{role.id}</td>
                 <td className="px-4 py-2 border">{role.role_name}</td>
                 <td className="px-4 py-2 border">

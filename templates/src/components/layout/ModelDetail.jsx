@@ -1,9 +1,9 @@
 const ModelDetail = ({ title, onClose, children, width = "max-w-md" }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className={`relative ${width} p-6 bg-white rounded-lg shadow-lg`}>
+      <div className={`relative ${width} p-6 bg-base-300 rounded-lg shadow-lg`}>
         <button
-          className="absolute text-gray-600 top-2 right-2 hover:text-red-500"
+          className="btn absolute  top-2 right-2 text-lg bg-transparent outline-none border-none hover:bg-transparent"
           onClick={onClose}
         >
           x

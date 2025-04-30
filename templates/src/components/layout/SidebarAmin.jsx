@@ -22,31 +22,58 @@ const SidebarAdmin = () => {
             <NavLink
               to="/admin/home"
               end
-              className={(isActive) =>
+              className={({ isActive }) =>
                 clsx(
-                  "flex gap-3 text-xl ",
+                  "flex gap-3 text-xl p-4 items-center",
                   isActive && "bg-primary text-primary-content"
                 )
               }
             >
               <ChartBarIcon className="w-6 h-6" />
-              <span>Trang chính</span>
+              <span>Trang chủ</span>
             </NavLink>
           </li>
           <li className="">
-            <NavLink to="/admin/articles">
+            <NavLink
+              to="/admin/articles"
+              end
+              className={({ isActive }) =>
+                clsx(
+                  "flex gap-3 text-xl p-4 items-center",
+                  isActive && "bg-primary text-primary-content"
+                )
+              }
+            >
               <DocumentTextIcon className="w-6 h-6" />
               <span>Danh sách bài viết</span>
             </NavLink>
           </li>
           <li className="">
-            <NavLink to="/admin/users">
+            <NavLink
+              to="/admin/users"
+              end
+              className={({ isActive }) =>
+                clsx(
+                  "flex gap-3 text-xl p-4 items-center",
+                  isActive && "bg-primary text-primary-content"
+                )
+              }
+            >
               <UserGroupIcon className="w-6 h-6" />
               <span>Danh sách người dùng</span>
             </NavLink>
           </li>
           <li className="">
-            <NavLink to="/admin/permission">
+            <NavLink
+              to="/admin/permission"
+              end
+              className={({ isActive }) =>
+                clsx(
+                  "flex gap-3 text-xl p-4 items-center",
+                  isActive && "bg-primary text-primary-content"
+                )
+              }
+            >
               <ShieldCheckIcon className="w-6 h-6" />
               <span>Phân quyền</span>
             </NavLink>
@@ -54,11 +81,11 @@ const SidebarAdmin = () => {
         </ul>
       </div>
       <div>
-        <div className="flex items-center gap-4 mb-4 cursor-pointer">
+        <div className="flex items-center gap-4 cursor-pointer p-4">
           <ArrowLeftEndOnRectangleIcon className="w-6 h-6" />
           <span>Đăng xuất</span>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 p-4">
           <ToggleTheme />
           <span>Mode</span>
         </div>
