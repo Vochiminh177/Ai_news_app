@@ -146,14 +146,18 @@ const ArticleAdmin = () => {
         </button>
       </div>
       <div className="flex flex-wrap items-center gap-4 mb-4">
-        <select name="" id="sort" className="border border-gray-300 rounded-sm">
+        <select
+          name=""
+          id="sort"
+          className="select border border-gray-300 rounded-sm"
+        >
           <option value="all">Tất cả</option>
           <option value="new">Mới nhất</option>
         </select>
         <select
           name=""
           id="status"
-          className="border border-gray-300 rounded-sm"
+          className="border select border-gray-300 rounded-sm"
         >
           <option value="">Tất cả</option>
           <option value="draft">Chờ duyệt</option>
@@ -163,7 +167,7 @@ const ArticleAdmin = () => {
         <select
           name=""
           id="category"
-          className="border border-gray-300 rounded-sm"
+          className="border border-gray-300 rounded-sm select"
         >
           <option value="">Tất cả</option>
           {category.map((category) => (
@@ -204,7 +208,7 @@ const ArticleAdmin = () => {
               <p className="line-clamp-2">{article.description}</p>
             </div>
             <div className="col-span-1">{article.status}</div>
-            <div className="items-center col-span-3 ">
+            <div className="items-center col-span-3 flex gap-3">
               <button
                 className="text-white bg-blue-500 cursor-pointer btn hover:bg-blue-700"
                 onClick={() => HandleDetail(article.id)}

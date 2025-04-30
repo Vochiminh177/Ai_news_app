@@ -40,6 +40,7 @@ class LoginView(APIView):
                 "message": "Đăng nhập thành công!",
                 "user_id": user.id,
                 "email": user.email,
+                "username": user.username,
                 "role": user.get_role()  
             }, status=status.HTTP_200_OK)
 

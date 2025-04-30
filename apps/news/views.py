@@ -63,10 +63,9 @@ def search_article(req):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 @api_view(["GET"])
-def article_user(req):
+def article_user(req, userID):
     if req.method == "GET":
-        user_id = req.GET.get("user_id", "")
-        articles = Article.objects.filter(user_id=user_id)
+        articles = Article.objects.filter(user_id=userID)
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     pass

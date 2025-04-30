@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiInstance from "../../api/axios";
 import ModelDetail from "../components/layout/ModelDetail";
+import * as motion from "motion/react-client";
 import {
   Chart as ChartJS,
   BarElement,
@@ -105,16 +106,27 @@ const HomeAdmin = () => {
     setSelectedArticle(null);
   };
   return (
-    <>
+    <div className="py-10">
       <h1 className="mb-8 text-3xl font-bold text-center ">Trang chủ</h1>
       <div className="grid grid-cols-3 gap-6 mx-8 mb-8">
-        <div className="py-6 bg-blue-300 rounded-sm">
-          Số lượng bài viết <span>{countArticle ? countArticle : 0}</span>
-        </div>
-        <div className="py-6 bg-blue-300 rounded-sm">
-          Số lượng user <span>{countUser ? countUser : 0}</span>
-        </div>
-        <div className="py-6 bg-blue-300 rounded-sm">Số </div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="py-6 bg-primary text-primary-content text-xl font-medium p-4 rounded-lg">
+            Số lượng bài viết: <span>{countArticle ? countArticle : 0}</span>
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="py-6 bg-primary text-primary-content text-xl font-medium p-4 rounded-lg">
+            Số lượng user: <span>{countUser ? countUser : 0}</span>
+          </div>
+        </motion.div>
       </div>
 
       <div className="p-6 mb-4  bg-white rounded shadow">
@@ -199,7 +211,7 @@ const HomeAdmin = () => {
           </div>
         </ModelDetail>
       )}
-    </>
+    </div>
   );
 };
 export default HomeAdmin;

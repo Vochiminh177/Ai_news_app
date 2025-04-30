@@ -4,6 +4,7 @@ from .models import Article, Category ,Comment
 
 
 class ArticleSerializer (serializers.ModelSerializer):
+    img = serializers.ImageField(required=False)
     class Meta:
         model =  Article
         fields = "__all__"
