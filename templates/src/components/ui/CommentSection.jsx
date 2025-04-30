@@ -3,10 +3,12 @@ import apiInstance from "../../../api/axios";
 const CommentSection = ({ articleID }) => {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
+  const [user, setUser] = useState([]);
   useEffect(() => {
     if (articleID) {
       console.log("articleID hiện tại:", articleID);
       fetchComment();
+      fetchUser();
     }
   }, [articleID]);
   const fetchComment = async () => {
@@ -16,6 +18,29 @@ const CommentSection = ({ articleID }) => {
     } catch (error) {
       console.error("Lỗi lấy bình luận", error);
     }
+  };
+  const fetchUser = async () => {
+    try {
+      const response = await apiInstance.get("/users");
+      console.log(response.data);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Lỗi lấy dữ liệu ", error);
+    }
+  };
+  const getInfoUser = (userID) => {
+    const users = user.find((user) => user.id === userID);
+    if (users) {
+      return {
+        username: users.username,
+        avatar: users.avatar || "http://localhost:8000/media/default.jpg",
+      };
+    }
+
+    return {
+      username: "Vô danh",
+      avatar: "http://localhost:8000/media/default.jpg",
+    };
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,13 +81,23 @@ const CommentSection = ({ articleID }) => {
         {comments.length === 0 && (
           <p className="text-sm italic text-gray-400">Chưa có bình luận nào.</p>
         )}
-        {comments.map((c) => (
-          <div key={c.id} className="p-4 rounded shadow-sm bg-base-100">
-            <p className="font-semibold">{c.user_id}</p>
-            <p className="mb-2 text-sm text-gray-500">{c.createdAt}</p>
-            <p>{c.content}</p>
-          </div>
-        ))}
+        {comments.map((c) => {
+          const { username, avatar } = getInfoUser(c.user); // Lấy tên và avatar người dùng
+          return (
+            <div key={c.id} className="p-4 rounded shadow-sm bg-base-100">
+              <div className="flex items-center">
+                <img
+                  src={avatar}
+                  alt={username}
+                  className="w-8 h-8 mr-3 rounded-full"
+                />
+                <p className="font-semibold">{username}</p>
+              </div>
+              <p className="mb-2 text-sm text-gray-500">{c.createdAt}</p>
+              <p>{c.content}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

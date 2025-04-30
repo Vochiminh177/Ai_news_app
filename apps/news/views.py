@@ -196,8 +196,8 @@ def add_view_article_detail(req, pk):
 def comment(req,pk):
     
     comment = Comment.objects.filter(article = pk)
-    if comment.exists():
+    if not comment.exists():
         return Response({"error":"Baì viết này không có bình luận"},status=status.HTTP_404_NOT_FOUND)
     if req.method == "GET":
-        serializer = CommentSerializer(comment)
+        serializer = CommentSerializer(comment , many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
