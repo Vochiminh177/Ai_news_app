@@ -30,10 +30,10 @@ const Home = () => {
             articles.map((article) => (
               <Post
                 title={article.title}
-                publishDate={convertTime(article.created_at)}
-                author="Jane Doe"
+                publishDate={article.created_at}
+                author={article.user_id}
                 description={article.description}
-                thumnail={`http://localhost:8000${article.img}`}
+                thumnail={article.img}
                 id={article.id}
                 key={article.id}
               />

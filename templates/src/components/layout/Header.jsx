@@ -9,7 +9,7 @@ const Header = () => {
   const { setArticle } = useArticleStore();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const { isAuth } = useAuthStore();
+  const { isAuth, setIsAuth, setDataUser } = useAuthStore();
 
   const handleSearch = () => {
     apiInstance
@@ -22,6 +22,11 @@ const Header = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleLogout = () => {
+    setIsAuth(false);
+    setDataUser({});
   };
 
   return (
@@ -72,9 +77,9 @@ const Header = () => {
           <p className="text-3xl font-playwrite">DNews</p>
         </div>
         <div className="hidden px-10 navbar-center lg:flex gap-9">
-          <NavLink to="/">Trang chu</NavLink>
-          <NavLink to="/tech">Cong nghe</NavLink>
-          <NavLink to="/sport">The thao</NavLink>
+          <NavLink to="/">Trang chủ</NavLink>
+          <NavLink to="/tech">Công nghệ</NavLink>
+          <NavLink to="/sport">Thể thao</NavLink>
           <NavLink to="/game">Game</NavLink>
         </div>
         <div className="gap-2 navbar-end">
@@ -82,7 +87,7 @@ const Header = () => {
             <input
               type="text"
               className="grow"
-              placeholder="Search"
+              placeholder="Tìm kiếm"
               onChange={(e) => setSearch(e.target.value)}
               value={search}
             />
@@ -123,29 +128,18 @@ const Header = () => {
                         isActive ? "bg-primary text-primary-content" : ""
                       }
                     >
-                      Thong tin tai khoan
+                      Thông tin tài khoản
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to="/account/article"
+                      to="/account/history"
                       end
                       className={({ isActive }) =>
                         isActive ? "bg-primary text-primary-content" : ""
                       }
                     >
-                      Bai viet cua ban
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/account/new_article"
-                      end
-                      className={({ isActive }) =>
-                        isActive ? "bg-primary text-primary-content" : ""
-                      }
-                    >
-                      Tao bai viet moi
+                      Bài viết của bạn
                     </NavLink>
                   </li>
                   <li>
@@ -156,8 +150,11 @@ const Header = () => {
                         isActive ? "bg-primary text-primary-content" : ""
                       }
                     >
-                      Đăng xuất
+                      Tạo bài viết mới
                     </NavLink>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Đăng xuất</button>
                   </li>
                 </ul>
               </div>
@@ -165,10 +162,10 @@ const Header = () => {
           ) : (
             <>
               <button className="px-3 py-2 rounded bg-primary text-primary-content min-w-24">
-                <NavLink to="/auth/login">Dang nhap</NavLink>
+                <NavLink to="/auth/login">Đăng nhập</NavLink>
               </button>
               <button className="px-3 py-2 rounded bg-primary text-primary-content min-w-24">
-                <NavLink to="/auth/register">Dang ki</NavLink>
+                <NavLink to="/auth/register">Đăng kí</NavLink>
               </button>
             </>
           )}

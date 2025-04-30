@@ -3,6 +3,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import useAuthStore from "../store/useAuthStore";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import createFileFromUrl from "../utils/createFileFormURL";
 
 const formats = [
   "header",
@@ -23,6 +25,7 @@ const ArticleEditor = () => {
   const [categoryID, setCategoryID] = useState(0);
   const [img, setImg] = useState(null);
   const { dataUser } = useAuthStore();
+  const navigate = useNavigate();
 
   const handleCancel = () => {
     setTitle("");
@@ -31,18 +34,22 @@ const ArticleEditor = () => {
     setImg(null);
     setValue("");
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("article_id", "12345");
     formData.append("title", title);
     formData.append("content", value);
-    formData.append("img", img);
     formData.append("description", description);
     formData.append("user_id", Number(dataUser.user_id));
     formData.append("status", "draft");
     formData.append("category", categoryID);
+
+    if (!img) {
+      const file = await createFileFromUrl("https://placehold.co/600x400");
+      formData.append("img", file);
+    } else {
+      formData.append("img", img);
+    }
 
     try {
       const res = await axios.post(
@@ -52,6 +59,7 @@ const ArticleEditor = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+      navigate("/account/history");
       console.log("Đăng bài thành công:", res.data);
     } catch (err) {
       console.error("Lỗi khi đăng bài:", err);

@@ -37,9 +37,9 @@ const Category = () => {
   }, [category]);
   return (
     <Container className="">
-      <div className="flex justify-between py-28">
-        <div>
-          <Heading title={listCategory[category]} />
+      <div className="flex justify-between gap-14 py-28">
+        <div className="flex-1">
+          <Heading title={listCategory[category]} clas />
           <div>
             {listArticle.map((article) => (
               <Post
@@ -48,6 +48,7 @@ const Category = () => {
                 publishDate={article.created_at}
                 description={article.description}
                 id={article.id}
+                author={article.user_id}
               />
             ))}
           </div>
