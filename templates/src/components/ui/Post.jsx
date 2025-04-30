@@ -12,7 +12,7 @@ const Post = ({
   return (
     <div className="card bg-base-100 shadow-xl w-[880px] p-5 mb-5">
       <figure className="w-full h-[368px] object-cover">
-        <img src={thumnail} alt="Shoes" />
+        <img src={`http://localhost:8000${thumnail}`} alt="Shoes" />
       </figure>
       <div className="card-body px-0">
         <h2 className="card-title">{title}</h2>

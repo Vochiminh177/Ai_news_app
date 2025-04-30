@@ -28,7 +28,7 @@ def article_list (req):
 @api_view(["GET", "PUT", "DELETE"])
 def article_detail(req, pk):
     try:
-        article = Article.objects.get(id=pk)
+        article = Article.objects.select_related('user_id').get(id=pk)
     except Article.DoesNotExist:
         return Response({"error": "Not Found Article"}, status=status.HTTP_404_NOT_FOUND)
     
@@ -49,7 +49,7 @@ def article_detail(req, pk):
 @api_view(["GET"])
 def article_category(req):
     if req.method == "GET":
-        category = req.data.get("category")
+        category = req.query_params.get("category")
         articles = Article.objects.filter(category=category)
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

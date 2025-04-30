@@ -83,9 +83,9 @@ load_dotenv()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "news_website",
+        'NAME': "django_db",
         'USER': "root",
-        'PASSWORD': "",
+        'PASSWORD': "root_password",
         'HOST': "localhost",
         'PORT': "3306",
         'OPTIONS': {

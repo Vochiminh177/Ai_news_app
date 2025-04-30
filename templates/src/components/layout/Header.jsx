@@ -104,7 +104,7 @@ const Header = () => {
           {isAuth ? (
             <>
               <div className="dropdown dropdown-hover">
-                <div tabindex="0" className="cursor-pointer">
+                <div tabIndex="0" className="cursor-pointer">
                   <div className="avatar">
                     <div className="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2">
                       <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
@@ -112,7 +112,7 @@ const Header = () => {
                   </div>
                 </div>
                 <ul
-                  tabindex="0"
+                  tabIndex="0"
                   className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
                 >
                   <li>

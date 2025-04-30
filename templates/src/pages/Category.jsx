@@ -1,30 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Heading from "../components/ui/Heading";
 import Container from "../components/layout/Container";
 import Post from "../components/ui/Post";
 import Sidebar from "../components/layout/Sidebar";
 import ToggleTheme from "../components/ui/ToggleTheme";
+import apiInstance from "../../api/axios";
 
 const Category = () => {
   const { category } = useParams();
+  const [listArticle, setListArticle] = useState([]);
   const listCategory = {
     tech: "Cong nghe",
     sport: "The thao",
     game: "Game",
   };
+
+  const categoryID = {
+    tech: 1,
+    sport: 2,
+    game: 3,
+  };
+
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const res = await apiInstance.get(`/articles/category`, {
+        params: {
+          category: categoryID[category],
+        },
+      });
+
+      setListArticle(res.data);
+    };
+
+    fetchArticle();
+  }, [category]);
   return (
     <Container className="">
       <div className="flex justify-between py-28">
         <div>
           <Heading title={listCategory[category]} />
           <div>
-            <Post
-              title="Breaking News: New Technology Revolutionizing the Industry"
-              publishDate="March 18, 2025"
-              author="Jane Doe"
-              description="A new technology has emerged that is expected to revolutionize the industry. Experts are excited about the potential impact this could have on businesses and consumers alike."
-            />
+            {listArticle.map((article) => (
+              <Post
+                title={article.title}
+                thumnail={article.img}
+                publishDate={article.created_at}
+                description={article.description}
+                id={article.id}
+              />
+            ))}
           </div>
         </div>
         <Sidebar />
