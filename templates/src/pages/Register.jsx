@@ -53,7 +53,9 @@ const Register = () => {
       >
         <h1 className="text-xl font-bold text-center">Welcome DNews</h1>
 
-        {error && <p className="mt-2 text-center text-red-600">{error}</p>}
+        {error && !message && (
+          <p className="mt-2 text-center text-red-600">{error}</p>
+        )}
         {message && (
           <p className="mt-2 text-center text-green-600">{message}</p>
         )}

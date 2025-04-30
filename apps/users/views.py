@@ -84,15 +84,9 @@ class RegisterView(APIView):
         #step 5: tự động tạo quyền user trong bảng UserRole
         role_id=Role.objects.get(role_name='user')
         user.roles.add(role_id)
-
+        serializer = UserSerializer(user, context={'request': request})
         return Response({"message": "Đăng ký thành công!",
-                         "data": {
-                        "id": user.id,
-                        "username": user.username,
-                        "avatar": user.avatar,
-                        "email": user.email,
-                        "role": user.get_role(),
-                        }
+                         "data": serializer.data
                         }, status=status.HTTP_201_CREATED)
 
 class GetAllUsers(APIView):

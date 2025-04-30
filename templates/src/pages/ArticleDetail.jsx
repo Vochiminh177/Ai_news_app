@@ -21,7 +21,6 @@ const ArticleDetail = () => {
         // 1. Lấy bài viết
         const articleRes = await apiInstance.get(`articles/${Number(id)}/`);
         setArticle(articleRes.data);
-
         // 2. Gửi request tăng view
         await apiInstance.put(`articles/add_view/${Number(id)}/`);
 
@@ -69,7 +68,7 @@ const ArticleDetail = () => {
               dangerouslySetInnerHTML={{ __html: article.content }}
             ></div>
           </div>
-          <CommentSection />
+          <CommentSection articleID={article.id} />
         </div>
         <Sidebar />
       </div>

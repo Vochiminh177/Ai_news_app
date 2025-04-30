@@ -15,7 +15,8 @@ class UserModel(AbstractUser):
         upload_to='avatars/',  
         blank=True,           
         null=True,     
-        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])] 
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])],
+        default='default.jpg'
     )
     created_at =models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

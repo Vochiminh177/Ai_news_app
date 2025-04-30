@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Article,Category
-from .serializer import ArticleSerializer, CategorySerializer
+from .models import Article,Category,Comment
+from .serializer import ArticleSerializer, CategorySerializer,CommentSerializer
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -190,4 +190,14 @@ def add_view_article_detail(req, pk):
         article.counter_view +=1
         article.save()
         serializer = ArticleSerializer(article)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["GET", "PUT"])
+def comment(req,pk):
+    
+    comment = Comment.objects.filter(article = pk)
+    if comment.exists():
+        return Response({"error":"Baì viết này không có bình luận"},status=status.HTTP_404_NOT_FOUND)
+    if req.method == "GET":
+        serializer = CommentSerializer(comment)
         return Response(serializer.data, status=status.HTTP_200_OK)

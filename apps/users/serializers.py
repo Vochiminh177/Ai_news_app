@@ -11,9 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
     def get_roles(self, obj):
         return [user_role.role.role_name for user_role in obj.user_roles.all()]
     def get_avatar(self, obj):
-        request = self.context.get('request')
         if obj.avatar:
-            return request.build_absolute_uri(obj.avatar.url)  
+            request = self.context.get('request', None)
+            url = obj.avatar.url
+            if request:
+                return request.build_absolute_uri(url)
+            return url
         return None
 
 class RoleSerializer(serializers.ModelSerializer):
