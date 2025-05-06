@@ -20,7 +20,7 @@ const Home = () => {
       .catch((err) => {
         setError(true);
       });
-  }, [setArticle]);
+  }, []);
 
   return (
     <Container className="">

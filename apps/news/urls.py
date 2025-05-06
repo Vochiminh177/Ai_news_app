@@ -13,5 +13,9 @@ urlpatterns = [
     path("articles/advanced_search/",advanced_search_article,name ="advanced-search" ),
     path("articles/stats/",stats_article,name="stat-article"),
     path("articles/add_view/<int:pk>/",add_view_article_detail,name="add-view-articles"),
-    path("comment/<int:pk>/",comment,name = "get-comment")
+    path("comment/<int:pk>/",comment,name = "get-comment"),
+    path("article/like/<int:pk>/",get_like_article,name="get-like-article"),
+    path("article/like/",toggle_like,name ="article_like"),
+    path("get_like_user/<int:pk>/",get_like_user,name="get-like-user")
+
 ]

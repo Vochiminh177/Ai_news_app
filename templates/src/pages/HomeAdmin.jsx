@@ -114,7 +114,7 @@ const HomeAdmin = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="py-6 bg-primary text-primary-content text-xl font-medium p-4 rounded-lg">
+          <div className="p-4 py-6 text-xl font-medium rounded-lg bg-primary text-primary-content">
             Số lượng bài viết: <span>{countArticle ? countArticle : 0}</span>
           </div>
         </motion.div>
@@ -123,17 +123,17 @@ const HomeAdmin = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="py-6 bg-primary text-primary-content text-xl font-medium p-4 rounded-lg">
+          <div className="p-4 py-6 text-xl font-medium rounded-lg bg-primary text-primary-content">
             Số lượng user: <span>{countUser ? countUser : 0}</span>
           </div>
         </motion.div>
       </div>
 
-      <div className="p-6 mb-4  bg-white rounded shadow">
+      <div className="p-6 mb-4 bg-white rounded shadow">
         <h2 className="mb-2 text-xl font-semibold">
           Biểu đồ tổng số bài đăng các tháng
         </h2>
-        <div className="mb-2 flex items-center space-x-4">
+        <div className="flex items-center mb-2 space-x-4">
           <select
             name=""
             id="mode"
@@ -156,7 +156,7 @@ const HomeAdmin = () => {
         </div>
         <Chart type="bar" data={chartData} options={chartOptions} />
       </div>
-      <div className="font-bold text-2xl ">
+      <div className="text-2xl font-bold ">
         Top 5 bài viết nhiêu lượt truy cập nhất
       </div>
 

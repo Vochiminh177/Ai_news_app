@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article,Category,Comment
+from .models import Article,Category,Comment,Like,UserModel
 from .serializer import ArticleSerializer, CategorySerializer,CommentSerializer
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
@@ -183,13 +183,50 @@ def add_view_article_detail(req, pk):
     try:
         article = Article.objects.get(id=pk)
     except Article.DoesNotExist:
-        return Response({"error": "Not Found Article"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Không tìm thấy bài viết"}, status=status.HTTP_404_NOT_FOUND)
     
     if req.method == "PUT":
         article.counter_view +=1
         article.save()
         serializer = ArticleSerializer(article)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_like_article(req, pk):
+    try:
+        like_count = Like.objects.filter(article = pk).count()
+        return Response({"like_count":like_count},status=status.HTTP_200_OK)
+    except Article.DoesNotExist:
+        return Response({"error": "Không tìm thấy bài viết"}, status=status.HTTP_404_NOT_FOUND)
+@api_view(['POST'])
+def toggle_like(req):
+    user_id = req.data.get('user_id')
+    article_id = req.data.get('article_id')
+
+    try:
+        user = UserModel.objects.get(id=user_id)
+        article =Article.objects.get(id = article_id)
+    except UserModel.DoesNotExist or Article.DoesNotExist:
+        return Response({"error":"Không tìm thấy user hoặc bài viết"},status=status.HTTP_404_NOT_FOUND)
+    
+    try:
+        like = Like.objects.get(user=user, article=article)
+        like.delete()
+        return Response({"message": "Đã bỏ thích bài viết."}, status=status.HTTP_200_OK)
+    except Like.DoesNotExist:
+        Like.objects.create(user=user, article=article)
+        return Response({"message": "Đã thích bài viết!"}, status=status.HTTP_201_CREATED)
+@api_view(['GET'])
+def get_like_user(req,pk):
+    try:
+        list_like = Like.objects.filter(user = pk)
+        list_id_article = [like.article.id for like in list_like]
+        return Response({"list_like":list_id_article},status=status.HTTP_200_OK)
+    except UserModel.DoesNotExist:
+         return Response({"error": "Không tìm người dùng"}, status=status.HTTP_404_NOT_FOUND)
+        
+
+
 
 @api_view(["GET", "PUT"])
 def comment(req,pk):
