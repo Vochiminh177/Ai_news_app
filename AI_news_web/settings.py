@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.news',
     "corsheaders",
+    'apps.news',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

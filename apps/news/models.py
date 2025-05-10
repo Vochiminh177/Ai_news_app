@@ -48,3 +48,13 @@ class Like(models.Model):
     def __str__(self):
         return f"{self.user.username} likes {self.article.title}"
     
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.CharField(max_length=100)
+    published_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
